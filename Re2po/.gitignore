@@ -1,0 +1,4 @@
+/gateway/
+/openwhisk-deploy-kube/
+.env
+.git_bak/
