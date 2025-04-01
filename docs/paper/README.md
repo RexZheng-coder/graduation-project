@@ -1,11 +1,12 @@
 # Paper
 
-This directory stores the paper copy associated with the graduation project.
+This directory stores the paper material associated with the graduation project.
 
 ## Contents
 
-- `re2po_paper.pdf` is the exported paper describing the problem setting, system design, and evaluation narrative behind Re2po.
+- `serverless_inference_planning_paper.pdf` is the first paper in the project timeline. It frames the fine-grained DNN model repository problem for serverless AI inference at the planning stage.
+- `re2po_paper.pdf` is the follow-on paper that came after the planning document and describes the more concrete Re2po problem setting, system design, and evaluation narrative behind the prototype.
 
 ## Why It Matters
 
-The paper explains the larger motivation for the repository layout in this workspace: the code here was not built as an isolated demo, but as part of a thesis effort around fine-grained DNN model storage and redundancy-aware model management for serverless edge inference.
+Taken together, these two papers explain the larger motivation for the repository layout in this workspace: the code here was not built as an isolated demo, but as part of a thesis effort that moved in time order from problem framing, to a named system design, and then to a prototype implementation.

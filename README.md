@@ -1,8 +1,8 @@
 # Re2po Workspace
 
-This repository is the full working workspace for my graduation project on fine-grained DNN model storage for serverless edge inference. It keeps both the final system prototype and the supporting experiments that led to it, so the structure reflects how the project was actually built rather than only the polished end result.
+This repository is the full working workspace for my graduation project on fine-grained DNN model storage for serverless edge inference. It keeps the planning document, the thesis paper, the final system prototype, and the supporting experiments that led to it, so the structure reflects how the project evolved rather than only the polished end result.
 
-The repository itself is the outer Re2po workspace. The main service implementation lives in the inner `Re2po/` directory, which contains the redundancy-aware model repository prototype for edge serverless computing. The surrounding directories preserve the training experiments, model decomposition scripts, local datasets, exported artifacts, and environment snapshots that supported the thesis work.
+The repository itself is the outer Re2po workspace. The main service implementation lives in the inner `Re2po/` directory, which contains the redundancy-aware model repository prototype for edge serverless computing. The surrounding directories preserve the planning paper, the thesis paper, the training experiments, the model decomposition scripts, the local datasets, the exported artifacts, and the environment snapshots that supported the thesis work.
 
 ## Repository Map
 
@@ -17,10 +17,21 @@ environments/  Docker build context and captured environment snapshots
 
 ## Recommended Reading Order
 
-1. Start with `Re2po/README.md` to understand the main problem, architecture, and service design.
-2. Read `docs/README.md` if you want the thesis context and paper-facing material.
-3. Browse `experiments/README.md` to see how the storage idea was explored and validated.
-4. Use `artifacts/README.md` and `datasets/README.md` as inventory guides for local materials.
+1. Start with `docs/README.md` if you want the project in its real chronological order.
+2. Read `docs/paper/serverless_inference_planning_paper.pdf` first to see the earlier planning-stage framing.
+3. Read `docs/paper/re2po_paper.pdf` next to see how that framing turned into the named Re2po system design.
+4. Move to `Re2po/README.md` for the implementation-oriented view.
+5. Browse `experiments/README.md` to see how the storage idea was explored and validated.
+6. Use `artifacts/README.md` and `datasets/README.md` as inventory guides for local materials.
+
+## Project Timeline
+
+This workspace follows the actual order in which the project matured:
+
+1. The planning paper came first and framed the broader problem of fine-grained DNN model repository design for serverless AI inference.
+2. The Re2po paper came next and narrowed that broader problem into a more concrete redundancy-aware repository design.
+3. The inner `Re2po/` codebase represents the prototype implementation stage that followed those papers.
+4. The `experiments/` and `artifacts/` directories preserve the technical exploration around that implementation.
 
 ## What This Workspace Contains
 
@@ -40,6 +51,7 @@ environments/  Docker build context and captured environment snapshots
 ## Quick Navigation
 
 - Main implementation: `Re2po/`
+- Planning paper: `docs/paper/serverless_inference_planning_paper.pdf`
 - Thesis paper copy: `docs/paper/re2po_paper.pdf`
 - MLflow experiment area: `experiments/mnist-mlflow/`
 - Model storage prototypes: `experiments/model-storage-prototypes/`
