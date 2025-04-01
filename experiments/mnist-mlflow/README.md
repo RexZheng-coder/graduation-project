@@ -1,76 +1,59 @@
-## MNIST example with MLflow
+# MNIST MLflow Experiment
 
-In this example, we train a Pytorch Lightning model to predict handwritten digits, leveraging early stopping.
-The code is almost entirely dedicated to model training, with the addition of a single `mlflow.pytorch.autolog()` call to enable automatic logging of params, metrics, and models,
-including the best model from early stopping.
+This directory contains a compact training-and-tracking experiment built around MNIST, PyTorch Lightning, and MLflow. Its role in the larger workspace is to preserve the experiment path that helped connect model training, artifact logging, and reproducible metadata capture.
 
-### Running the code
+## Purpose
 
-To run the example via MLflow, navigate to the `mlflow/examples/pytorch/MNIST` directory and run the command
+The experiment answers a practical question that matters for Re2po: once a model is trained, how should its parameters, metrics, and serialized outputs be tracked so that storage and reconstruction work can be inspected later?
 
-```
-mlflow run .
-```
+## Main Files
 
-This will run `mnist_autolog_example.py` with the default set of parameters such as `max_epochs=5`. You can see the default value in the `MLproject` file.
+- `mnist_autolog_example.py` is the main training script.
+- `MLproject` defines the MLflow project entry.
+- `conda.yaml`, `python_env.yaml`, and `example2/python_env.yaml` capture environment variants used while running the experiment.
+- `mlruns/` stores recorded MLflow runs.
+- `lightning_logs/` stores PyTorch Lightning outputs.
+- `epoch=*.ckpt` files are training checkpoints preserved as local artifacts.
+- `dataset/` stores the local MNIST copy used by the run.
 
-In order to run the file with custom parameters, run the command
+## Typical Workflow
 
-```
-mlflow run . -P max_epochs=X
-```
+Run through MLflow:
 
-where `X` is your desired value for `max_epochs`.
-
-If you have the required modules for the file and would like to skip the creation of a conda environment, add the argument `--env-manager=local`.
-
-```
+```sh
 mlflow run . --env-manager=local
 ```
 
-### Viewing results in the MLflow UI
+Run with custom parameters:
 
-Once the code is finished executing, you can view the run's metrics, parameters, and details by running the command
-
-```
-mlflow ui
+```sh
+mlflow run . --env-manager=local -P max_epochs=5
 ```
 
-and navigating to [http://localhost:5000](http://localhost:5000).
-
-For more details on MLflow tracking, see [the docs](https://www.mlflow.org/docs/latest/tracking.html#mlflow-tracking).
-
-### Passing custom training parameters
-
-The parameters can be overridden via the command line:
-
-1. max_epochs - Number of epochs to train model. Training can be interrupted early via Ctrl+C
-2. devices - Number of GPUs.
-3. strategy - [strategy](https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#trainer-class-api) (e.g. "ddp" for the Distributed Data Parallel backend) to use for training. By default, no strategy is used.
-4. accelerator - [accelerator](https://lightning.ai/docs/pytorch/stable/extensions/accelerator.html) (e.g. "gpu" - for running in GPU environment. Set to "cpu" by default)
-5. batch_size - Input batch size for training
-6. num_workers - Number of worker threads to load training data
-7. learning_rate - Learning rate
-
-For example:
-
-```
-mlflow run . -P max_epochs=5 -P devices=1 -P batch_size=32 -P num_workers=2 -P learning_rate=0.01 -P strategy="ddp"
-```
-
-Or to run the training script directly with custom parameters:
+Run the script directly:
 
 ```sh
 python mnist_autolog_example.py \
-    --trainer.max_epochs 5 \
-    --trainer.devices 1 \
-    --trainer.strategy "ddp" \
-    --trainer.accelerator "gpu" \
-    --data.batch_size 64 \
-    --data.num_workers 3 \
-    --model.learning_rate 0.001
+  --trainer.max_epochs 5 \
+  --trainer.devices 1 \
+  --trainer.accelerator cpu \
+  --data.batch_size 64 \
+  --data.num_workers 2 \
+  --model.learning_rate 0.001
 ```
 
-## Logging to a custom tracking server
+Inspect tracking output:
 
-To configure MLflow to log to a custom (non-default) tracking location, set the MLFLOW_TRACKING_URI environment variable, e.g. via export MLFLOW_TRACKING_URI=http://localhost:5000/. For more details, see [the docs](https://mlflow.org/docs/latest/tracking.html#where-runs-are-recorded).
+```sh
+mlflow ui
+```
+
+## Why This Folder Was Kept
+
+This experiment is simpler than Re2po, but it preserves a useful part of the project story:
+
+- how model artifacts were logged,
+- how training metadata was captured,
+- and how experiment outputs accumulated before the final storage system took shape.
+
+In other words, this is not the product itself. It is part of the evidence trail behind the product.
