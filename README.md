@@ -2,12 +2,12 @@
 
 This repository is the full working workspace for my graduation project on fine-grained DNN model storage for serverless edge inference. It keeps both the final system prototype and the supporting experiments that led to it, so the structure reflects how the project was actually built rather than only the polished end result.
 
-The core project is `Re2po/`, a redundancy-aware model repository prototype for edge serverless computing. The surrounding directories preserve the training experiments, model decomposition scripts, local datasets, exported artifacts, and environment snapshots that supported the thesis work.
+The repository itself is the outer Re2po workspace. The main service implementation lives in the inner `Re2po/` directory, which contains the redundancy-aware model repository prototype for edge serverless computing. The surrounding directories preserve the training experiments, model decomposition scripts, local datasets, exported artifacts, and environment snapshots that supported the thesis work.
 
 ## Repository Map
 
 ```text
-Re2po/         Main system prototype and service implementation
+Re2po/         Main service implementation and prototype source code
 docs/          Paper and project reference material
 experiments/   Prototype code, training experiments, and exploratory scripts
 datasets/      Local raw dataset copies used by the experiments
@@ -32,14 +32,14 @@ environments/  Docker build context and captured environment snapshots
 
 ## Notes On Organization
 
-- `Re2po/` is the deliverable-quality part of the repository.
+- The inner `Re2po/` directory is the deliverable-quality part of the repository.
 - `experiments/` is intentionally preserved as research history, so some files are rougher and more exploratory.
 - `artifacts/` and `datasets/` are useful for reproduction and inspection, but they are supporting materials rather than the main project narrative.
 - Cache folders and notebook checkpoint folders are intentionally excluded from the organized layout.
 
 ## Quick Navigation
 
-- Main project: `Re2po/`
+- Main implementation: `Re2po/`
 - Thesis paper copy: `docs/paper/re2po_paper.pdf`
 - MLflow experiment area: `experiments/mnist-mlflow/`
 - Model storage prototypes: `experiments/model-storage-prototypes/`
